@@ -1,1 +1,23 @@
+name: Claude Sonnet 5
 
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test RadoxAI connection
+        run: |
+          curl -s https://radoxai.com/v1/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.ANTHROPIC_AUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "claude-sonnet-5",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hello Claude. Reply briefly."
+                }
+              ]
+            }'
